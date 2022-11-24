@@ -33,6 +33,8 @@ class Main extends Sprite
 	{
 		super();
 
+		SUtil.uncaughtErrorHandler();
+
 		if (stage != null)
 		{
 			init();
@@ -66,6 +68,8 @@ class Main extends Sprite
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
+
+		SUtil.checkPermissions();
 
 		#if !debug
 		initialState = TitleState;
