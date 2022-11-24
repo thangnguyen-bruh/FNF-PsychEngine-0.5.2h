@@ -15,7 +15,7 @@ import openfl.utils.Assets;
 
 using StringTools;
 
-#if (sys && !ios)
+#if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
