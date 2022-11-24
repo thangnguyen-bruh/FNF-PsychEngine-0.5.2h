@@ -92,8 +92,8 @@ class WeekData {
 		weeksLoaded.clear();
 		#if MODS_ALLOWED
 		var disabledMods:Array<String> = [];
-		var modsListPath:String = 'modsList.txt';
-		var directories:Array<String> = [Paths.mods(), Paths.getPreloadPath()];
+		var modsListPath:String = SUtil.getStorageDirectory() + 'modsList.txt';
+		var directories:Array<String> = [Paths.mods(), SUtil.getStorageDirectory() + Paths.getPreloadPath()];
 		var originalLength:Int = directories.length;
 		if(FileSystem.exists(modsListPath))
 		{
@@ -128,12 +128,14 @@ class WeekData {
 				//trace('pushed Directory: ' + folder);
 			}
 		}
+
+		var sexList:Array<String> = CoolUtil.coolTextFile(SUtil.getStorageDirectory() + Paths.getPreloadPath('weeks/weekList.txt'));
 		#else
 		var directories:Array<String> = [Paths.getPreloadPath()];
 		var originalLength:Int = directories.length;
+		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/weekList.txt'));
 		#end
 
-		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/weekList.txt'));
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
 				var fileToCheck:String = directories[j] + 'weeks/' + sexList[i] + '.json';
@@ -249,9 +251,9 @@ class WeekData {
 		Paths.currentModDirectory = '';
 		
 		#if MODS_ALLOWED
-		if (FileSystem.exists("modsList.txt"))
+		if (FileSystem.exists(SUtil.getStorageDirectory() + "modsList.txt"))
 		{
-			var list:Array<String> = CoolUtil.listFromString(File.getContent("modsList.txt"));
+			var list:Array<String> = CoolUtil.listFromString(File.getContent(SUtil.getStorageDirectory() + "modsList.txt"));
 			var foundTheTop = false;
 			for (i in list)
 			{
